@@ -1,0 +1,60 @@
+# 必配 4：Stage A（冒烟训练）配置
+# 目标：快速验证数据配对、路径、训练流程与基础风格偏移是否正常。
+
+project:
+  name: "flux1dev_jpfantasy_style_lora_stageA"
+  task: "style_lora"
+  output_root: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs"
+
+model:
+  base_model: "FLUX.1-dev"
+  model_family: "flux"
+  precision: "bf16"
+
+data:
+  dataset_config: "F:/Cursor_project/ComfyUI_Project/lora_model/configs/dataset.yaml"
+
+lora:
+  rank: 16
+  alpha: 16
+  dropout: 0.0
+  target: "all"
+
+optimizer:
+  type: "adamw"
+  learning_rate: 0.0001
+  weight_decay: 0.01
+
+training:
+  total_steps: 600
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  lr_scheduler: "cosine"
+  warmup_steps: 50
+  seed: 20260407
+  num_workers: 2
+
+checkpoint:
+  save_every_steps: 200
+  max_to_keep: 5
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/checkpoints"
+
+sample:
+  enabled: true
+  every_steps: 200
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/samples"
+  prompts:
+    - "jpfantasy_style, anime fantasy heroine, detailed costume, soft rim light, clean lineart, high quality"
+    - "jpfantasy_style, fantasy city street at dusk, pastel palette, cinematic composition, high detail"
+  negative_prompt: "low quality, blurry, artifacts, bad anatomy, extra fingers, distorted face"
+  seed: 20260407
+  guidance_scale: 3.5
+  steps: 28
+
+logging:
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/logs"
+  log_every_steps: 20
+
+notes:
+  - "本配置仅用于冒烟测试，不用于最终报告定稿权重。"
+  - "若流程报错，先修路径和数据，再重新运行 Stage A。"

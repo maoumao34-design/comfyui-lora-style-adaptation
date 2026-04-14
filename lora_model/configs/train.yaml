@@ -1,0 +1,69 @@
+# Training config template (public version)
+# Notes:
+# 1) This file defines reusable training parameters and output paths.
+# 2) Field names may vary by toolkit version; map by meaning if needed.
+# 3) Keep training/inference in the same model family.
+
+project:
+  name: "flux1dev_jpfantasy_style_lora"
+  task: "style_lora"
+  output_root: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs"
+
+model:
+  # Keep consistent with inference model family
+  base_model: "FLUX.1-dev"
+  model_family: "flux"
+  precision: "bf16"
+
+data:
+  dataset_config: "F:/Cursor_project/ComfyUI_Project/lora_model/configs/dataset.yaml"
+
+lora:
+  rank: 16
+  alpha: 16
+  dropout: 0.0
+  target: "all"
+
+optimizer:
+  type: "adamw"
+  learning_rate: 0.0001
+  weight_decay: 0.01
+
+training:
+  # Stage A smoke test: 300-800
+  # Stage B full training: 2000-6000 (adjust by data quality)
+  total_steps: 800
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  lr_scheduler: "cosine"
+  warmup_steps: 50
+  seed: 20260407
+  num_workers: 2
+
+checkpoint:
+  save_every_steps: 200
+  max_to_keep: 10
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/checkpoints"
+
+sample:
+  enabled: true
+  every_steps: 200
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/samples"
+  # Fixed prompts for checkpoint comparison
+  prompts:
+    - "jpfantasy_style, anime fantasy heroine, detailed costume, soft rim light, clean lineart, high quality"
+    - "jpfantasy_style, fantasy city street at dusk, pastel palette, cinematic composition, high detail"
+  negative_prompt: "low quality, blurry, artifacts, bad anatomy, extra fingers, distorted face"
+  seed: 20260407
+  guidance_scale: 3.5
+  steps: 28
+
+logging:
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/logs"
+  log_every_steps: 20
+
+notes:
+  - "Start with Stage A to validate the pipeline."
+  - "Move to Stage B only after Stage A is stable."
+  - "Map fields by semantics if toolkit versions differ."
+

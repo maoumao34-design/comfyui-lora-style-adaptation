@@ -1,0 +1,9 @@
+_private_course_materials/
+.cursor/
+lora_model/outputs/*.log
+
+# LoRA training artifacts and caches
+lora_model/data/train/images/_latent_cache/
+lora_model/outputs/
+*.safetensors
+*.pt

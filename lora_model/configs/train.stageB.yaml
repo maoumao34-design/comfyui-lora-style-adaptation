@@ -1,0 +1,61 @@
+# 必配 4：Stage B（正式训练）配置
+# 目标：在 Stage A 通过后产出可用于报告对比的正式 checkpoint。
+
+project:
+  name: "flux1dev_jpfantasy_style_lora_stageB"
+  task: "style_lora"
+  output_root: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs"
+
+model:
+  base_model: "FLUX.1-dev"
+  model_family: "flux"
+  precision: "bf16"
+
+data:
+  dataset_config: "F:/Cursor_project/ComfyUI_Project/lora_model/configs/dataset.yaml"
+
+lora:
+  rank: 16
+  alpha: 16
+  dropout: 0.0
+  target: "all"
+
+optimizer:
+  type: "adamw"
+  learning_rate: 0.00008
+  weight_decay: 0.01
+
+training:
+  total_steps: 3000
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  lr_scheduler: "cosine"
+  warmup_steps: 100
+  seed: 20260407
+  num_workers: 2
+
+checkpoint:
+  save_every_steps: 300
+  max_to_keep: 12
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/checkpoints"
+
+sample:
+  enabled: true
+  every_steps: 300
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/samples"
+  prompts:
+    - "jpfantasy_style, anime fantasy heroine, detailed costume, soft rim light, clean lineart, high quality"
+    - "jpfantasy_style, fantasy city street at dusk, pastel palette, cinematic composition, high detail"
+  negative_prompt: "low quality, blurry, artifacts, bad anatomy, extra fingers, distorted face"
+  seed: 20260407
+  guidance_scale: 3.5
+  steps: 28
+
+logging:
+  dir: "F:/Cursor_project/ComfyUI_Project/lora_model/outputs/logs"
+  log_every_steps: 20
+
+notes:
+  - "Stage B 仅在 Stage A 正常后启动。"
+  - "正式训练时建议固定 prompt/seed 以便横向比较 checkpoint。"
+  - "若出现过拟合，可优先回退到中间 checkpoint。"

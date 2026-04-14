@@ -1,0 +1,45 @@
+# 必配 3：数据集配置模板（Ostris 通用映射版）
+# 说明：
+# 1) 本模板用于固定数据路径与命名规则，确保“拿到数据即可训练”。
+# 2) 不同 Ostris 版本字段名可能略有差异；若 UI 字段不同，请按语义一一映射。
+
+dataset:
+  name: "jpfantasy_style_dataset"
+  description: "Style LoRA dataset for Japanese fantasy style"
+
+  # 训练图目录（固定为本项目结构）
+  image_dir: "F:/Cursor_project/ComfyUI_Project/lora_model/data/train/images"
+
+  # 文本标注目录（与图片同名 .txt）
+  caption_dir: "F:/Cursor_project/ComfyUI_Project/lora_model/data/train/captions"
+
+  # 文件扩展名（按需增删）
+  image_extensions: [".png", ".jpg", ".jpeg", ".webp"]
+  caption_extension: ".txt"
+
+  # 编码与映射规则
+  caption_encoding: "utf-8"
+  paired_by_stem: true
+  require_one_to_one_pair: true
+
+  # 触发词（用于训练与推理统一）
+  trigger_token: "jpfantasy_style"
+
+  # 训练分辨率（建议与数据生成分辨率一致）
+  resolution:
+    width: 1024
+    height: 1024
+
+  # 数据预处理策略（保守稳定）
+  preprocess:
+    center_crop: false
+    random_flip: false
+    shuffle_caption: false
+    keep_aspect_ratio: true
+
+  # 数据完整性检查（建议保持开启）
+  validation:
+    skip_broken_images: false
+    fail_on_empty_caption: true
+    fail_on_unpaired_file: true
+
