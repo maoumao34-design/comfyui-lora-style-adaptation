@@ -35,15 +35,5 @@
 - Prompt ID、seed 与 strength 参数记录在 `outputs/compare/PROMPTS_COMPARE_LOG.md`。
 - 基线工作流参考见 `outputs/compare/_workflow_baseline/`。
 
-## 公开仓库说明
 
-本仓库已按公开展示进行整理：
-
-- 私有或仅本地使用的资料不纳入版本跟踪。
-- 编辑器元数据和大体积训练产物通过 `.gitignore` 排除。
-- 保留用于方法说明、结果展示与报告复核的核心文件。
-
-## License
-
-仓库当前未默认附带许可证。如需公开分发或复用，建议补充合适的 License 文件。
 
