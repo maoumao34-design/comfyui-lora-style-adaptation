@@ -24,7 +24,6 @@
 - `PROJECT_REPORT_DRAFT_CN.md`：中文项目报告草稿。
 - `PROJECT_REPORT_SOURCE_NOTES.md`：报告撰写使用的事实与实验记录。
 - `PROJECT_REPORT_FRAMEWORK.md`：报告结构框架（公开版）。
-- `PROJECT_REQUIREMENTS_PUBLIC.md`：项目需求说明（公开版）。
 - `PROJECT_MEMORY_PUBLIC.md`：项目记录与决策摘要（公开版）。
 
 ## 方法概览
